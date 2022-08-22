@@ -3,12 +3,9 @@ using System.Data.Common;
 
 Console.WriteLine("Hello, World!");
 
-
 string conString = "Server=(localdb)\\mssqllocaldb;Database=Northwnd;Trusted_Connection=true";
 DbProviderFactory factory = System.Data.SqlClient.SqlClientFactory.Instance;
 //DbProviderFactory factory = Oracle.ManagedDataAccess.Client.OracleClientFactory.Instance;
-
-
 
 DbConnection con = factory.CreateConnection();
 con.ConnectionString = conString;

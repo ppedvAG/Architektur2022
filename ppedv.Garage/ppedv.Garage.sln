@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.32804.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Garage.Model", "ppedv.Garage.Model\ppedv.Garage.Model.csproj", "{9501DA25-4613-416C-8513-D4F252EDF0DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Garage.Data.EfCore", "ppedv.Garage.Data.EfCore\ppedv.Garage.Data.EfCore.csproj", "{442093D0-D794-4449-AFAB-11E097D698DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9501DA25-4613-416C-8513-D4F252EDF0DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9501DA25-4613-416C-8513-D4F252EDF0DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9501DA25-4613-416C-8513-D4F252EDF0DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{442093D0-D794-4449-AFAB-11E097D698DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{442093D0-D794-4449-AFAB-11E097D698DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{442093D0-D794-4449-AFAB-11E097D698DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{442093D0-D794-4449-AFAB-11E097D698DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

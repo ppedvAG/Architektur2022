@@ -13,9 +13,12 @@ namespace ppedv.Garage.Logic.CarServices
             Repository = repository;
         }
 
-        public Location GetLocationWithFastesCars()
+        public Location? GetLocationWithFastesCars()
         {
-            return Repository.GetAll<Location>().OrderBy(x => x.Cars.Sum(c => c.KW)).FirstOrDefault();
+            return Repository.GetAll<Location>()
+                             .OrderByDescending(x => x.Cars.Sum(c => c.KW))
+                             .ThenByDescending(x => x.Cars.Average(x => x.BuiltDate.Ticks))
+                             .FirstOrDefault();
         }
 
         public bool CheckColor(Car car, IEnumerable<string> allowedColor)
@@ -29,7 +32,7 @@ namespace ppedv.Garage.Logic.CarServices
             if (string.IsNullOrWhiteSpace(car.Color))
                 throw new ArgumentException("color ist null or empty");
 
-            return allowedColor.Contains(car.Color);
+            return allowedColor.Contains(car.Color.ToLower());
         }
     }
 }

@@ -1,13 +1,15 @@
+using AutoFixture;
+using FluentAssertions;
 using ppedv.Garage.Model;
 
 namespace ppedv.Garage.Data.EfCore.Tests
 {
-    public class EfContextTests
+    public partial class EfContextTests
     {
         [Fact]
         public void Can_create_DB()
         {
-            var testConString = "Server=(localdb)\\mssqllocaldb;Database=Garage_DEV_CreateTest;Trusted_Connection=true";
+            const string testConString = "Server=(localdb)\\mssqllocaldb;Database=Garage_DEV_CreateTest;Trusted_Connection=true";
             using var con = new EfContext(testConString);
             con.Database.EnsureDeleted();
 
@@ -87,6 +89,83 @@ namespace ppedv.Garage.Data.EfCore.Tests
             {
                 var loaded = con.Find<Car>(car.Id);
                 Assert.Null(loaded);
+            }
+        }
+
+        [Fact]
+        public void Can_insert_and_read_car_AutoFix()
+        {
+            var fix = new Fixture();
+            fix.Behaviors.Add(new OmitOnRecursionBehavior());
+            fix.Customizations.Add(new PropertyNameOmitter(nameof(Entity.Id)));
+            var car = fix.Create<Car>();
+
+            using (var con = new EfContext())
+            {
+                con.Cars.Add(car);
+                con.SaveChanges();
+            }
+
+            using (var con = new EfContext())
+            {
+                var loaded = con.Find<Car>(car.Id);
+                loaded.Should().NotBeNull();
+                loaded.Should().BeEquivalentTo(car, x => x.IgnoringCyclicReferences());
+            }
+        }
+
+        [Fact]
+        public void Delete_car_should_not_delete_Location()
+        {
+            var car = new Car();
+            var loc = new Location();
+            car.Location = loc;
+
+            using (var con = new EfContext()) //insert car with location
+            {
+                con.Cars.Add(car);
+                con.SaveChanges();
+            }
+
+            using (var con = new EfContext()) //delete car
+            {
+                var loaded = con.Find<Car>(car.Id);
+                con.Remove(loaded);
+                con.SaveChanges();
+            }
+
+            using (var con = new EfContext()) //verify loc still exists 
+            {
+                var loaded = con.Find<Location>(loc.Id);
+                loaded.Should().NotBeNull();
+            }
+        }
+
+        [Fact]
+        public void Delete_location_should_set_cars_location_NULL()
+        {
+            var car = new Car();
+            var loc = new Location();
+            car.Location = loc;
+
+            using (var con = new EfContext()) //insert car with location
+            {
+                con.Cars.Add(car);
+                con.SaveChanges();
+            }
+
+            using (var con = new EfContext()) //delete loc
+            {
+                var loaded = con.Find<Location>(loc.Id);
+                con.Remove(loaded);
+                con.SaveChanges();
+            }
+
+            using (var con = new EfContext()) //verify car still exists 
+            {
+                var loaded = con.Find<Car>(car.Id);
+                loaded.Should().NotBeNull();
+                loaded.Location.Should().BeNull();
             }
         }
     }

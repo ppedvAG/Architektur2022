@@ -15,7 +15,7 @@ namespace ppedv.Garage.Logic.CarServices.Tests
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> GetAll<T>() where T : Entity
+        public IQueryable<T> Query<T>() where T : Entity
         {
             if (typeof(T) == typeof(Location))
             {
@@ -27,7 +27,7 @@ namespace ppedv.Garage.Logic.CarServices.Tests
                 var l3 = new Location() { Name = "L3" };
                 l3.Cars.Add(new Car() { KW = 50 });
                 l3.Cars.Add(new Car() { KW = 20 });
-                return new[] { l1, l2, l3 }.Cast<T>();
+                return new[] { l1, l2, l3 }.Cast<T>().AsQueryable();
             }
             throw new NotImplementedException();
         }

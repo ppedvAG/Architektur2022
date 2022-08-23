@@ -4,6 +4,7 @@ using ppedv.Garage.Logic.CarServices;
 using ppedv.Garage.Model;
 using ppedv.Garage.Model.Contracts;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 
 Console.WriteLine("*** Garage v0.1 ***");
 
@@ -27,7 +28,7 @@ var cm = new CarManager(cont.Resolve<IRepository>());
 var bestLoc = cm.GetLocationWithFastesCars();
 Console.WriteLine($"Best Location: {(bestLoc == null ? "nix" : bestLoc.Name)}");
 
-foreach (var car in cm.Repository.GetAll<Car>())
+foreach (var car in cm.Repository.Query<Car>().Where(x => x.KW > 1).ToList())
 {
     //Console.WriteLine($"{car.Manufacturer} {car.Model} {car.KW}KW {car.Color}");
     Console.WriteLine($"{car.Manufacturer} {car.KW}KW ");

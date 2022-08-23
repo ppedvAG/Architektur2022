@@ -11,7 +11,7 @@ namespace ppedv.Garage.Logic.CarServices.Tests
         public void GetLocationWithFastesCars_no_Locations_in_DB_returns_null()
         {
             var mock = new Mock<IRepository>();
-            mock.Setup(x => x.GetAll<Location>()).Returns(() => new List<Location>());
+            mock.Setup(x => x.Query<Location>()).Returns(() => new List<Location>().AsQueryable());
             var cm = new CarManager(mock.Object);
 
             var result = cm.GetLocationWithFastesCars();
@@ -33,7 +33,7 @@ namespace ppedv.Garage.Logic.CarServices.Tests
         public void GetLocationWithFastesCars_3_locations_L2_has_fastest_cars_moq()
         {
             var mock = new Mock<IRepository>();
-            mock.Setup(x => x.GetAll<Location>()).Returns(() =>
+            mock.Setup(x => x.Query<Location>()).Returns(() =>
             {
                 var l1 = new Location() { Name = "L1" };
                 l1.Cars.Add(new Car() { KW = 50 });
@@ -43,21 +43,21 @@ namespace ppedv.Garage.Logic.CarServices.Tests
                 var l3 = new Location() { Name = "L3" };
                 l3.Cars.Add(new Car() { KW = 50 });
                 l3.Cars.Add(new Car() { KW = 20 });
-                return new[] { l1, l2, l3 };
+                return new[] { l1, l2, l3 }.AsQueryable();
             });
             var cm = new CarManager(mock.Object);
 
             var result = cm.GetLocationWithFastesCars();
 
             result.Name.Should().Be("L2");
-            mock.Verify(x => x.GetAll<Car>(), Times.Never);
+            mock.Verify(x => x.Query<Car>(), Times.Never);
         }
 
         [Fact]
         public void GetLocationWithFastesCars_2_Locations_have_same_KW_sum_then_BuildDate_()
         {
             var mock = new Mock<IRepository>();
-            mock.Setup(x => x.GetAll<Location>()).Returns(() =>
+            mock.Setup(x => x.Query<Location>()).Returns(() =>
             {
                 var l1 = new Location() { Name = "L1" };
                 l1.Cars.Add(new Car() { KW = 50, BuiltDate = DateTime.Now.AddDays(-10) });
@@ -65,14 +65,14 @@ namespace ppedv.Garage.Logic.CarServices.Tests
                 l2.Cars.Add(new Car() { KW = 50, BuiltDate = DateTime.Now.AddDays(-5) });
                 var l3 = new Location() { Name = "L3" };
                 l3.Cars.Add(new Car() { KW = 50, BuiltDate = DateTime.Now.AddDays(-10) });
-                return new[] { l1, l2, l3 };
+                return new[] { l1, l2, l3 }.AsQueryable();
             });
             var cm = new CarManager(mock.Object);
 
             var result = cm.GetLocationWithFastesCars();
 
             result.Name.Should().Be("L2");
-            mock.Verify(x => x.GetAll<Car>(), Times.Never);
+            mock.Verify(x => x.Query<Car>(), Times.Never);
         }
 
 

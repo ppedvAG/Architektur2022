@@ -15,3 +15,5 @@ https://fluentassertions.com/
 https://prismlibrary.com/docs/index.html  
 https://github.com/Fody/PropertyChanged  
 https://github.com/public-apis/public-apis  
+
+https://app.diagrams.net/

@@ -12,7 +12,7 @@ builder.Services.AddControllers(options =>
     options.OutputFormatters.RemoveType<SystemTextJsonOutputFormatter>();
     options.OutputFormatters.Add(new SystemTextJsonOutputFormatter(new JsonSerializerOptions(JsonSerializerDefaults.Web)
     {
-        ReferenceHandler = ReferenceHandler.Preserve
+        ReferenceHandler = ReferenceHandler.IgnoreCycles
     }));
 });
 

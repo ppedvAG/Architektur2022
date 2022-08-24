@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{A9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossCutting", "CrossCutting", "{47ECE407-1167-48BD-8535-B6B253BA02BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Garage.UI.Api", "ppedv.Garage.UI.Api\ppedv.Garage.UI.Api.csproj", "{B07849EF-8C6C-4949-9073-70A56A0A186C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{C2DBA4F7-2540-423E-A8CA-446B37566E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2DBA4F7-2540-423E-A8CA-446B37566E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2DBA4F7-2540-423E-A8CA-446B37566E4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B07849EF-8C6C-4949-9073-70A56A0A186C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B07849EF-8C6C-4949-9073-70A56A0A186C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B07849EF-8C6C-4949-9073-70A56A0A186C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B07849EF-8C6C-4949-9073-70A56A0A186C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{62863207-8BCC-451A-ACF2-8F4CA0A2786E} = {A96137A2-D4C7-4D36-BBD3-DE3A4B2B328F}
 		{B51ADBCC-36C1-428A-8643-9D52C78390BA} = {B00199E1-ED10-47CD-B9D1-E3E2B6B93406}
 		{C2DBA4F7-2540-423E-A8CA-446B37566E4A} = {B00199E1-ED10-47CD-B9D1-E3E2B6B93406}
+		{B07849EF-8C6C-4949-9073-70A56A0A186C} = {B00199E1-ED10-47CD-B9D1-E3E2B6B93406}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BDFC4D74-063B-4BCA-9980-A0C56F16F269}

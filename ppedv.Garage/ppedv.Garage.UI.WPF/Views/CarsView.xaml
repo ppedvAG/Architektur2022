@@ -12,7 +12,7 @@
     </UserControl.DataContext>
     <DockPanel>
         <WrapPanel DockPanel.Dock="Top">
-            <Button>Speichern</Button>
+            <Button Command="{Binding SaveCommand}">Speichern</Button>
             <Button>Neu</Button>
             <Button>Löschen</Button>
         </WrapPanel>
@@ -23,7 +23,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <DataGrid ItemsSource="{Binding Cars}"/>
+            <DataGrid ItemsSource="{Binding Cars}"
+                      SelectedItem="{Binding SelectedCar}"/>
 
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
 
@@ -42,19 +43,22 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Label>Hersteller</Label>
-                <TextBox Grid.Column="1"/>
+                <TextBox Text="{Binding SelectedCar.Manufacturer}" Grid.Column="1"/>
                 <Label Grid.Row="1">Modell</Label>
-                <TextBox Grid.Row="1" Grid.Column="1"/>
+                <TextBox Text="{Binding SelectedCar.Model}" Grid.Row="1" Grid.Column="1"/>
                 <Label Grid.Row="2">KW</Label>
-                <TextBox Grid.Row="2" Grid.Column="1"/>
-                <Label Grid.Row="3">Baujahr</Label>
-                <DatePicker Grid.Row="3" Grid.Column="1"/>
+                <TextBox Text="{Binding SelectedCar.KW}" Grid.Row="2" Grid.Column="1"/>
+                <StackPanel Grid.Row="3" Orientation="Horizontal">
+                    <Label >Baujahr</Label>
+                    <TextBlock Text="{Binding Alter}"/>
+                </StackPanel>
+                <DatePicker SelectedDate="{Binding SelectedCar.BuiltDate}" Grid.Row="3" Grid.Column="1"/>
                 <Label Grid.Row="4">Farbe</Label>
-                <TextBox Grid.Row="4" Grid.Column="1"/>
+                <TextBox Text="{Binding SelectedCar.Color}"  Grid.Row="4" Grid.Column="1"/>
                 <Label Grid.Row="5">Ort</Label>
-                <ComboBox Grid.Row="5" Grid.Column="1"/>
+                <ComboBox Text="{Binding SelectedCar.Location.Name}" Grid.Row="5" Grid.Column="1"/>
                 <Label Grid.Row="6">Fahrer</Label>
-                <ListBox Grid.Row="6" Grid.Column="1"/>
+                <ListBox ItemsSource="{Binding SelectedCar.Drivers}" DisplayMemberPath="Name" Grid.Row="6" Grid.Column="1"/>
             </Grid>
         </Grid>
     </DockPanel>

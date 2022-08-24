@@ -5,7 +5,7 @@ namespace ppedv.Garage.Data.EfCore
 {
     public class EfUnitOfWork : IUnitOfWork
     {
-        public IRepository<Car> CarRepository => new EfRepository<Car>(_context);
+        public ICarRepository CarRepository => new EfCarRepository(_context);
 
         public IRepository<Driver> DriverRepository => new EfRepository<Driver>(_context);
 
@@ -17,6 +17,17 @@ namespace ppedv.Garage.Data.EfCore
         }
 
         readonly EfContext _context = new();
+    }
+
+    public class EfCarRepository : EfRepository<Car>, ICarRepository
+    {
+        public EfCarRepository(EfContext context) : base(context)
+        { }
+
+        public IEnumerable<Car> GetAllRedCars()
+        {
+            return _context.Cars.Where(x => x.Color == "red");
+        }
     }
 
     public class EfRepository<T> : IRepository<T> where T : Entity

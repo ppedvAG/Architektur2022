@@ -1,5 +1,11 @@
 ﻿namespace ppedv.Garage.Model.Contracts
 {
+
+    public interface ICarRepository : IRepository<Car>
+    {
+        IEnumerable<Car> GetAllRedCars();
+    }
+
     public interface IRepository<T> where T : Entity
     {
         IQueryable<T> Query();
@@ -12,7 +18,7 @@
 
     public interface IUnitOfWork
     {
-        public IRepository<Car> CarRepository { get; }
+        public ICarRepository CarRepository { get; }
         public IRepository<Driver> DriverRepository { get; }
         public IRepository<Location> LocationRepository { get; }
         int SaveAll();

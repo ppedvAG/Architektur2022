@@ -1,7 +1,12 @@
+using ppedv.Garage.Logic.CarServices;
+using ppedv.Garage.Model.Contracts.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IUnitOfWork, ppedv.Garage.Data.EfCore.EfUnitOfWork>();
+builder.Services.AddScoped<ICarManager, CarManager>();
 
 var app = builder.Build();
 

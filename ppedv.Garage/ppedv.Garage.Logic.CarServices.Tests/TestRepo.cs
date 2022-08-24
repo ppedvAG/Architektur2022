@@ -1,5 +1,5 @@
 ﻿using ppedv.Garage.Model;
-using ppedv.Garage.Model.Contracts;
+using ppedv.Garage.Model.Contracts.Infrastructure;
 
 namespace ppedv.Garage.Logic.CarServices.Tests
 {

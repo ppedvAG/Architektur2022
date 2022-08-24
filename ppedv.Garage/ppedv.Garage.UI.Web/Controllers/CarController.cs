@@ -2,23 +2,29 @@
 using Microsoft.AspNetCore.Mvc;
 using ppedv.Garage.Logic.CarServices;
 using ppedv.Garage.Model;
+using ppedv.Garage.Model.Contracts.Infrastructure;
 
 namespace ppedv.Garage.UI.Web.Controllers
 {
     public class CarController : Controller
     {
-        CarManager cm = new CarManager(new Data.EfCore.EfUnitOfWork());
+        private readonly IUnitOfWork unitOfWork;
+
+        public CarController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
 
         // GET: CarController
         public ActionResult Index()
         {
-            return View(cm.UnitOfWork.CarRepository.Query().ToList());
+            return View(unitOfWork.CarRepository.Query().ToList());
         }
 
         // GET: CarController/Details/5
         public ActionResult Details(int id)
         {
-            return View(cm.UnitOfWork.CarRepository.GetById(id));
+            return View(unitOfWork.CarRepository.GetById(id));
         }
 
         // GET: CarController/Create
@@ -34,8 +40,8 @@ namespace ppedv.Garage.UI.Web.Controllers
         {
             try
             {
-                cm.UnitOfWork.CarRepository.Add(car);
-                cm.UnitOfWork.SaveAll();
+                unitOfWork.CarRepository.Add(car);
+                unitOfWork.SaveAll();
 
                 return RedirectToAction(nameof(Index));
             }
@@ -48,7 +54,7 @@ namespace ppedv.Garage.UI.Web.Controllers
         // GET: CarController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(cm.UnitOfWork.CarRepository.GetById(id));
+            return View(unitOfWork.CarRepository.GetById(id));
         }
 
         // POST: CarController/Edit/5
@@ -58,8 +64,8 @@ namespace ppedv.Garage.UI.Web.Controllers
         {
             try
             {
-                cm.UnitOfWork.CarRepository.Update(car);
-                cm.UnitOfWork.SaveAll();
+                unitOfWork.CarRepository.Update(car);
+                unitOfWork.SaveAll();
 
                 return RedirectToAction(nameof(Index));
             }
@@ -72,7 +78,7 @@ namespace ppedv.Garage.UI.Web.Controllers
         // GET: CarController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(cm.UnitOfWork.CarRepository.GetById(id));
+            return View(unitOfWork.CarRepository.GetById(id));
         }
 
         // POST: CarController/Delete/5
@@ -82,8 +88,8 @@ namespace ppedv.Garage.UI.Web.Controllers
         {
             try
             {
-                cm.UnitOfWork.CarRepository.Delete(car);
-                cm.UnitOfWork.SaveAll();
+                unitOfWork.CarRepository.Delete(car);
+                unitOfWork.SaveAll();
 
                 return RedirectToAction(nameof(Index));
             }

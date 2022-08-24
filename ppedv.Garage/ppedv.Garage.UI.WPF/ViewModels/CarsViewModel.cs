@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 using ppedv.Garage.Logic.CarServices;
 using ppedv.Garage.Model;
+using ppedv.Garage.Model.Contracts.Infrastructure;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -12,7 +14,8 @@ namespace ppedv.Garage.UI.WPF.ViewModels
 
     class CarsViewModel : ObservableObject
     {
-        CarManager cm = new CarManager(new Data.EfCore.EfUnitOfWork());
+        
+
         private Car selectedCar;
 
         public ObservableCollection<Car> Cars { get; set; }
@@ -42,13 +45,16 @@ namespace ppedv.Garage.UI.WPF.ViewModels
             }
         }
 
-
+        IUnitOfWork uow;
         public CarsViewModel()
         {
-            Cars = new ObservableCollection<Car>(cm.UnitOfWork.CarRepository.Query());
-            SaveCommand = new SaveCommand(cm.UnitOfWork);
+            uow = App.Current.Services.GetService<IUnitOfWork>();
 
-            SaveCommand2 = new RelayCommand(() => cm.UnitOfWork.SaveAll());
+            Cars = new ObservableCollection<Car>(uow.CarRepository.Query());
+            SaveCommand = new SaveCommand(uow);
+
+            SaveCommand2 = new RelayCommand(() => uow.SaveAll());
+
         }
     }
 }

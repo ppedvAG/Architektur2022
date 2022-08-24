@@ -1,4 +1,4 @@
-﻿using ppedv.Garage.Model.Contracts;
+﻿using ppedv.Garage.Model.Contracts.Infrastructure;
 using System;
 using System.Windows.Input;
 

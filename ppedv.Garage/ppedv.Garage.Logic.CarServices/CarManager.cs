@@ -1,9 +1,9 @@
 ﻿using ppedv.Garage.Model;
-using ppedv.Garage.Model.Contracts;
+using ppedv.Garage.Model.Contracts.Infrastructure;
 
 namespace ppedv.Garage.Logic.CarServices
 {
-    public class CarManager
+    public class CarManager : ICarManager
     {
         public IUnitOfWork UnitOfWork { get; }
 

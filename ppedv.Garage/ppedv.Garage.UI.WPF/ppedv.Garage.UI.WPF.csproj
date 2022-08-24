@@ -12,4 +12,10 @@
     <PackageReference Include="AdonisUI.ClassicTheme" Version="1.17.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ppedv.Garage.Data.EfCore\ppedv.Garage.Data.EfCore.csproj" />
+    <ProjectReference Include="..\ppedv.Garage.Logic.CarServices\ppedv.Garage.Logic.CarServices.csproj" />
+    <ProjectReference Include="..\ppedv.Garage.Model\ppedv.Garage.Model.csproj" />
+  </ItemGroup>
+
 </Project>

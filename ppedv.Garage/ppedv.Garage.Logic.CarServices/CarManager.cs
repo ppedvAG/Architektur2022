@@ -5,16 +5,16 @@ namespace ppedv.Garage.Logic.CarServices
 {
     public class CarManager
     {
-        public IRepository Repository { get; }
+        public IUnitOfWork UnitOfWork { get; }
 
-        public CarManager(IRepository repository)
+        public CarManager(IUnitOfWork unitOfWork)
         {
-            Repository = repository;
+            UnitOfWork = unitOfWork;
         }
 
         public Location? GetLocationWithFastesCars()
         {
-            return Repository.Query<Location>()
+            return UnitOfWork.LocationRepository.Query()
                              .OrderByDescending(x => x.Cars.Sum(c => c.KW)).ToList()
                              .Where(x => x.Cars.Count > 0)
                              .OrderByDescending(x => x.Cars.Average(x => x.BuiltDate.Ticks))

@@ -3,36 +3,52 @@ using ppedv.Garage.Model.Contracts;
 
 namespace ppedv.Garage.Data.EfCore
 {
-    public class EfRepository : IRepository
+    public class EfUnitOfWork : IUnitOfWork
     {
-        EfContext _context = new EfContext();
+        public IRepository<Car> CarRepository => new EfRepository<Car>(_context);
 
-        public void Add<T>(T entity) where T : Entity
-        {
-            _context.Set<T>().Add(entity);
-        }
+        public IRepository<Driver> DriverRepository => new EfRepository<Driver>(_context);
 
-        public void Delete<T>(T entity) where T : Entity
-        {
-            _context.Set<T>().Remove(entity);
-       }
-
-        public IQueryable<T> Query<T>() where T : Entity
-        {
-            return _context.Set<T>();
-        }
-
-        public T GetById<T>(int id) where T : Entity
-        {
-            return _context.Set<T>().Find(id);
-        }
+        public IRepository<Location> LocationRepository => new EfRepository<Location>(_context);
 
         public int SaveAll()
         {
             return _context.SaveChanges();
         }
 
-        public void Update<T>(T entity) where T : Entity
+        readonly EfContext _context = new();
+    }
+
+    public class EfRepository<T> : IRepository<T> where T : Entity
+    {
+        protected readonly EfContext _context;
+
+        public EfRepository(EfContext efContext)
+        {
+            _context = efContext;
+        }
+
+        public void Add(T entity)
+        {
+            _context.Set<T>().Add(entity);
+        }
+
+        public void Delete(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+        }
+
+        public IQueryable<T> Query()
+        {
+            return _context.Set<T>();
+        }
+
+        public T? GetById(int id)
+        {
+            return _context.Set<T>().Find(id);
+        }
+
+        public void Update(T entity)
         {
             _context.Set<T>().Update(entity);
         }

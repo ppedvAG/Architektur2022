@@ -10,9 +10,11 @@ namespace ppedv.Garage.Logic.CarServices.Tests
         [Fact]
         public void GetLocationWithFastesCars_no_Locations_in_DB_returns_null()
         {
-            var mock = new Mock<IRepository>();
-            mock.Setup(x => x.Query<Location>()).Returns(() => new List<Location>().AsQueryable());
-            var cm = new CarManager(mock.Object);
+            var repoMock = new Mock<IRepository<Location>>();
+            var uowMock = new Mock<IUnitOfWork>();
+            uowMock.Setup(x => x.LocationRepository).Returns(repoMock.Object);
+            repoMock.Setup(x => x.Query()).Returns(() => new List<Location>().AsQueryable());
+            var cm = new CarManager(uowMock.Object);
 
             var result = cm.GetLocationWithFastesCars();
 
@@ -22,7 +24,8 @@ namespace ppedv.Garage.Logic.CarServices.Tests
         [Fact]
         public void GetLocationWithFastesCars_3_locations_L2_has_fastest_cars()
         {
-            var cm = new CarManager(new TestRepo());
+            var uow = new TestUnitOfWork();
+            var cm = new CarManager(uow);
 
             var result = cm.GetLocationWithFastesCars();
 
@@ -32,8 +35,10 @@ namespace ppedv.Garage.Logic.CarServices.Tests
         [Fact]
         public void GetLocationWithFastesCars_3_locations_L2_has_fastest_cars_moq()
         {
-            var mock = new Mock<IRepository>();
-            mock.Setup(x => x.Query<Location>()).Returns(() =>
+            var repoMock = new Mock<IRepository<Location>>();
+            var uowMock = new Mock<IUnitOfWork>();
+            uowMock.Setup(x => x.LocationRepository).Returns(repoMock.Object);
+            repoMock.Setup(x => x.Query()).Returns(() =>
             {
                 var l1 = new Location() { Name = "L1" };
                 l1.Cars.Add(new Car() { KW = 50 });
@@ -45,19 +50,21 @@ namespace ppedv.Garage.Logic.CarServices.Tests
                 l3.Cars.Add(new Car() { KW = 20 });
                 return new[] { l1, l2, l3 }.AsQueryable();
             });
-            var cm = new CarManager(mock.Object);
+            var cm = new CarManager(uowMock.Object);
 
             var result = cm.GetLocationWithFastesCars();
 
             result.Name.Should().Be("L2");
-            mock.Verify(x => x.Query<Car>(), Times.Never);
+            repoMock.Verify(x => x.Query(), Times.Once);
         }
 
         [Fact]
         public void GetLocationWithFastesCars_2_Locations_have_same_KW_sum_then_BuildDate_()
         {
-            var mock = new Mock<IRepository>();
-            mock.Setup(x => x.Query<Location>()).Returns(() =>
+            var repoMock = new Mock<IRepository<Location>>();
+            var uowMock = new Mock<IUnitOfWork>();
+            uowMock.Setup(x => x.LocationRepository).Returns(repoMock.Object);
+            repoMock.Setup(x => x.Query()).Returns(() =>
             {
                 var l1 = new Location() { Name = "L1" };
                 l1.Cars.Add(new Car() { KW = 50, BuiltDate = DateTime.Now.AddDays(-10) });
@@ -67,12 +74,12 @@ namespace ppedv.Garage.Logic.CarServices.Tests
                 l3.Cars.Add(new Car() { KW = 50, BuiltDate = DateTime.Now.AddDays(-10) });
                 return new[] { l1, l2, l3 }.AsQueryable();
             });
-            var cm = new CarManager(mock.Object);
+            var cm = new CarManager(uowMock.Object);
 
             var result = cm.GetLocationWithFastesCars();
 
             result.Name.Should().Be("L2");
-            mock.Verify(x => x.Query<Car>(), Times.Never);
+            repoMock.Verify(x => x.Query(), Times.Once);
         }
 
 

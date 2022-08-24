@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.32804.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Garage.Model", "ppedv.Garage.Model\ppedv.Garage.Model.csproj", "{9501DA25-4613-416C-8513-D4F252EDF0DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ppedv.Garage.Model", "ppedv.Garage.Model\ppedv.Garage.Model.csproj", "{9501DA25-4613-416C-8513-D4F252EDF0DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Garage.Data.EfCore", "ppedv.Garage.Data.EfCore\ppedv.Garage.Data.EfCore.csproj", "{442093D0-D794-4449-AFAB-11E097D698DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ppedv.Garage.Data.EfCore", "ppedv.Garage.Data.EfCore\ppedv.Garage.Data.EfCore.csproj", "{442093D0-D794-4449-AFAB-11E097D698DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Garage.Data.EfCore.Tests", "ppedv.Garage.Data.EfCore.Tests\ppedv.Garage.Data.EfCore.Tests.csproj", "{C1216EDE-6E9B-4409-BCB1-D69800CE9F17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ppedv.Garage.Data.EfCore.Tests", "ppedv.Garage.Data.EfCore.Tests\ppedv.Garage.Data.EfCore.Tests.csproj", "{C1216EDE-6E9B-4409-BCB1-D69800CE9F17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Garage.Logic.CarServices", "ppedv.Garage.Logic.CarServices\ppedv.Garage.Logic.CarServices.csproj", "{46F6EE89-0100-43E5-8424-53168FB731AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ppedv.Garage.Logic.CarServices", "ppedv.Garage.Logic.CarServices\ppedv.Garage.Logic.CarServices.csproj", "{46F6EE89-0100-43E5-8424-53168FB731AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Garage.UI.DevConsole", "ppedv.Garage.UI.DevConsole\ppedv.Garage.UI.DevConsole.csproj", "{67774AF8-3C5F-421C-83E1-34EC02859B2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ppedv.Garage.UI.DevConsole", "ppedv.Garage.UI.DevConsole\ppedv.Garage.UI.DevConsole.csproj", "{67774AF8-3C5F-421C-83E1-34EC02859B2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Garage.Logic.CarServices.Tests", "ppedv.Garage.Logic.CarServices.Tests\ppedv.Garage.Logic.CarServices.Tests.csproj", "{62863207-8BCC-451A-ACF2-8F4CA0A2786E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ppedv.Garage.Logic.CarServices.Tests", "ppedv.Garage.Logic.CarServices.Tests\ppedv.Garage.Logic.CarServices.Tests.csproj", "{62863207-8BCC-451A-ACF2-8F4CA0A2786E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Garage.UI.Web", "ppedv.Garage.UI.Web\ppedv.Garage.UI.Web.csproj", "{B51ADBCC-36C1-428A-8643-9D52C78390BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{62863207-8BCC-451A-ACF2-8F4CA0A2786E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62863207-8BCC-451A-ACF2-8F4CA0A2786E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62863207-8BCC-451A-ACF2-8F4CA0A2786E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B51ADBCC-36C1-428A-8643-9D52C78390BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B51ADBCC-36C1-428A-8643-9D52C78390BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B51ADBCC-36C1-428A-8643-9D52C78390BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B51ADBCC-36C1-428A-8643-9D52C78390BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

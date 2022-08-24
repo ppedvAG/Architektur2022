@@ -5,7 +5,7 @@ namespace ppedv.Garage.Logic.CarServices.Tests
 {
     class TestUnitOfWork : IUnitOfWork
     {
-        public IRepository<Car> CarRepository => throw new NotImplementedException();
+        public ICarRepository CarRepository => throw new NotImplementedException();
 
         public IRepository<Driver> DriverRepository => throw new NotImplementedException();
 
